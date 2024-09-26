@@ -68,9 +68,9 @@ const Dashboard = () => {
         gridTemplateAreas: gridTemplateSmallScreens,
       }
     }>
-      <Row1 />
-      <Row2 />
-      <Row3 />
+      <Row1 />  {/* Row1 component */}
+      <Row2 />  {/* Row2 component */}
+      <Row3 />  {/* Row3 component */}
     </Box>
   );
 };
