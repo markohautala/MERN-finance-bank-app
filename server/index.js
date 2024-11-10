@@ -34,7 +34,8 @@ mongoose
   .then(async () => {
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
-    await mongoose.connection.db.dropDatabase();
-    KPI.insertMany(kpis);
+    /* One time only to seed the database */
+    // await mongoose.connection.db.dropDatabase();
+    // KPI.insertMany(kpis);
   })
   .catch((error) => console.log(`${error} did not connect`));
