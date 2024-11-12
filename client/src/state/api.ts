@@ -7,7 +7,7 @@ export const api = createApi({
   reducerPath: "main",  // reducer path for the api means that the api will be stored in the store under the main key
   tagTypes: ["Kpis"],
   endpoints: (build) => ({
-    getKpis: build.query<void, void>({
+    getKpis: build.query<Array<GetKpisResponse>, void>({
       query: () => "Kpi/Kpis/",   // baseurl + Kpi/Kpis/ will be the endpoint (kpi means key performance indicator)
       providesTags: ["Kpis"],  // provides tags for the api call
     }),

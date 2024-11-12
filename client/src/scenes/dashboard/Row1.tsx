@@ -9,6 +9,19 @@ const Row1 = (props: Props) => {
   const { data } = useGetKpisQuery();
   console.log(data)
 
+  const revenueExpenses = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+          expenses: expenses
+        }
+      })
+    );
+    }, [data]);  // run only when data changes
+
   return (
   <>
     <DashboardBox  gridArea="a">
