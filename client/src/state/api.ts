@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import { GetKpisResponse } from './types';
 
 // Create a new api call/object with the base query function - vite_base_url is in our .env file
 export const api = createApi({
