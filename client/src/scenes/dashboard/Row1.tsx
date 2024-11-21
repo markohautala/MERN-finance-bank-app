@@ -46,8 +46,17 @@ const Row1 = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <XAxis
+              dataKey="name"
+              tickLine={false}
+              style={{ fontSize: "12px" }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={{ strokeWidth: "0" }}
+              style={{ fontSize: "12px" }}
+              domain={[10000, 23500]}
+            />
             <Tooltip />
             <Area
               type="monotone"
