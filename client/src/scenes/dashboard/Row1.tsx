@@ -10,6 +10,9 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Line,
+  CartesianGrid,
+  Legend,
 } from "recharts";
 
 const Row1 = () => {
@@ -107,7 +110,62 @@ const Row1 = () => {
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea="b"></DashboardBox>
+      <DashboardBox gridArea="b">
+      <BoxHeader
+          title="Revenue and Expenses"
+          subtitle="Top line represents revenue, bottom line represents expenses"
+          sideText="+4%"
+        />
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            width={500}
+            height={400}
+            data={revenueExpenses}
+            margin={{
+              top: 15, // top margin
+              right: 20, // right margin
+              left: -10, // left margin
+              bottom: 60, // bottom margin
+            }}
+          >
+            <CartesianGrid vertical={false} stroke={palette.grey[800]} />  // Only horisontal lines
+            <XAxis
+              dataKey="name"
+              tickLine={false}
+              style={{ fontSize: "12px" }}
+            />
+            <YAxis
+              yAzisId="left"  // This is the axis on the left side
+              tickLine={false}
+              axisLine={false}  // This will remove the axis line
+              style={{ fontSize: "12px" }}
+            />
+            <YAxis
+              yAzisId="right"  // This is the axis on the right side
+              orientation="right"  // This will place the axis on the right side
+              tickLine={false}
+              axisLine={false}
+              style={{ fontSize: "12px" }}
+            />
+            <Tooltip />
+            <Legend height={20} wrapperStyle={{
+              margin: "0px 0px 10px 0px"
+            }}/>
+            <Line
+              yAxisId="left"  // This will place the line on the left side
+              type="monotone"
+              dataKey="profit"
+              stroke={palette.tertiary[500]}
+            />
+            <Line
+              yAxisId="right"  // This will place the line on the right side
+              type="monotone"
+              dataKey="revenue"
+              stroke={palette.primary.main}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </DashboardBox>
       <DashboardBox gridArea="c"></DashboardBox>
     </>
   );
