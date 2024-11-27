@@ -135,13 +135,13 @@ const Row1 = () => {
               style={{ fontSize: "12px" }}
             />
             <YAxis
-              yAzisId="left"  // This is the axis on the left side
+              yAxisId="left"  // This is the axis on the left side
               tickLine={false}
               axisLine={false}  // This will remove the axis line
               style={{ fontSize: "12px" }}
             />
             <YAxis
-              yAzisId="right"  // This is the axis on the right side
+              yAxisId="right"  // This is the axis on the right side
               orientation="right"  // This will place the axis on the right side
               tickLine={false}
               axisLine={false}
