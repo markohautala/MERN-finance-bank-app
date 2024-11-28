@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Line,
+  LineChart,
   CartesianGrid,
   Legend,
 } from "recharts";
@@ -28,6 +29,19 @@ const Row1 = () => {
           name: month.substring(0, 3),
           revenue: revenue,
           expenses: expenses,
+        };
+      })
+    );
+  }, [data]); // run only when data changes
+
+  const revenueProfit = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),  // Only show the first 3 letters of the month
+          revenue: revenue,
+          profit: (revenue - expenses).toFixed(2),  // Calculate the profit. toFixed will round the number to 2 decimal places
         };
       })
     );
@@ -112,20 +126,18 @@ const Row1 = () => {
       </DashboardBox>
       <DashboardBox gridArea="b">
       <BoxHeader
-          title="Revenue and Expenses"
+          title="Profit and Revenue"
           subtitle="Top line represents revenue, bottom line represents expenses"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            width={500}
-            height={400}
-            data={revenueExpenses}
+          <LineChart
+            data={revenueProfit}
             margin={{
-              top: 15, // top margin
-              right: 20, // right margin
+              top: 20, // top margin
+              right: 0, // right margin
               left: -10, // left margin
-              bottom: 60, // bottom margin
+              bottom: 55, // bottom margin
             }}
           >
             <CartesianGrid vertical={false} stroke={palette.grey[800]} />  // Only horisontal lines
@@ -163,7 +175,7 @@ const Row1 = () => {
               dataKey="revenue"
               stroke={palette.primary.main}
             />
-          </AreaChart>
+          </LineChart>
         </ResponsiveContainer>
       </DashboardBox>
       <DashboardBox gridArea="c"></DashboardBox>
