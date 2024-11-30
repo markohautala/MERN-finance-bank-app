@@ -5,13 +5,16 @@ import { GetKpisResponse } from './types';
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   reducerPath: "main",  // reducer path for the api means that the api will be stored in the store under the main key
-  tagTypes: ["Kpis"],
+  tagTypes: ["Kpis", "Products"],  // tag types for the api call
   endpoints: (build) => ({
     getKpis: build.query<Array<GetKpisResponse>, void>({
-      query: () => "Kpi/Kpis/",   // baseurl + Kpi/Kpis/ will be the endpoint (kpi means key performance indicator)
+      query: () => "kpi/kpis/",   // baseurl + Kpi/Kpis/ will be the endpoint (kpi means key performance indicator)
       providesTags: ["Kpis"],  // provides tags for the api call
+    getProducts: build.query<Array<GetKpisResponse>, void>({
+      query: () => "product/products/",
+      providesTags: ["Products"],
     }),
   })
 })
 
-export const { useGetKpisQuery } = api;
+export const { useGetKpisQuery, useGetProductsQuery } = api;
