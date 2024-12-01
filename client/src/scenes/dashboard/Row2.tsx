@@ -2,6 +2,7 @@ import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import { useGetKpisQuery, useGetProductsQuery } from "@/state/api";
 import { useMemo } from "react";
+import { useTheme } from "@mui/material";
 import {
   CartesianGrid,
   LineChart,
@@ -20,11 +21,11 @@ const Row2 = () => {
   const operationalExpenses = useMemo(() => {
     return (
       operationalData &&
-      operationalData[0].monthlyData.map(({ month, revenue, expenses }) => {
+      operationalData[0].monthlyData.map(({ month, operationalExpenses, nonOperationalExpenses }) => {
         return {
           name: month.substring(0, 3),
-          revenue: revenue,
-          expenses: expenses,
+          "Operational Expenses": operationalExpenses,
+          "Non Operational Expenses": nonOperationalExpenses
         };
       })
     );
