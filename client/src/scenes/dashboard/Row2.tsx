@@ -14,6 +14,9 @@ import {
   PieChart,
   Pie,
   Cell,
+  ScatterChart,
+  Scatter,
+  ZAxis,
 } from "recharts";
 import Flexbetween from "@/components/FlexBetween";
 
@@ -31,13 +34,30 @@ const Row2 = () => {
   const operationalExpenses = useMemo(() => {
     return (
       operationalData &&
-      operationalData[0].monthlyData.map(({ month, operationalExpenses, nonOperationalExpenses }) => {
-        return {
-          name: month.substring(0, 3),
-          "Operational Expenses": operationalExpenses,
-          "Non Operational Expenses": nonOperationalExpenses
-        };
-      })
+      operationalData[0].monthlyData.map(
+        ({ month, operationalExpenses, nonOperationalExpenses }) => {
+          return {
+            name: month.substring(0, 3),
+            "Operational Expenses": operationalExpenses,
+            "Non Operational Expenses": nonOperationalExpenses,
+          };
+        }
+      )
+    );
+  }, [operationalData]); // run only when data changes
+
+  const productExpenseData = useMemo(() => {
+    return (
+      productData &&
+      productData.map(
+        ({ _id, price, expense }) => {
+          return {
+            id: _id,
+            price: price,
+            expense: expense,
+          };
+        }
+      )
     );
   }, [operationalData]); // run only when data changes
 
@@ -96,10 +116,7 @@ const Row2 = () => {
         </ResponsiveContainer>
       </DashboardBox>
       <DashboardBox gridArea="e">
-        <BoxHeader
-          title="Campaign and Targets"
-          sideText="+4%"
-        />
+        <BoxHeader title="Campaign and Targets" sideText="+4%" />
         <Flexbetween
           mt="0.25rem"
           gap="1.5rem"
@@ -116,7 +133,7 @@ const Row2 = () => {
             }}
           >
             <Pie
-              stroke="none"  // This will remove the border on the pie chart
+              stroke="none" // This will remove the border on the pie chart
               data={pieData}
               innerRadius={18}
               outerRadius={38}
@@ -125,32 +142,82 @@ const Row2 = () => {
               dataKey="value"
             >
               {pieData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={pieColors[index]}
-                />
+                <Cell key={`cell-${index}`} fill={pieColors[index]} />
               ))}
             </Pie>
           </PieChart>
           <Box
             ml="-0.7rem" // ml means margin left
-            flexBasis="40%"  // This will try to make the box take up 40% of the remaining space
-            textAlign="center"  // This will center the text
+            flexBasis="40%" // This will try to make the box take up 40% of the remaining space
+            textAlign="center" // This will center the text
           >
             <Typography variant="h5">Target Sales</Typography>
-            <Typography m="0.4rem 0" variant="h3" color={palette.primary[300]}>83</Typography>
-            <Typography variant="h6" color={palette.grey[600]}>Desired finance goals of the campaign</Typography>
+            <Typography m="0.4rem 0" variant="h3" color={palette.primary[300]}>
+              83
+            </Typography>
+            <Typography variant="h6" color={palette.grey[600]}>
+              Desired finance goals of the campaign
+            </Typography>
           </Box>
           <Box
-            flexBasis="40%"  // This will try to make the box take up 40% of the remaining space
+            flexBasis="40%" // This will try to make the box take up 40% of the remaining space
           >
             <Typography variant="h5">Losses in Revenue</Typography>
-            <Typography m="0.4rem 0" variant="h3" >Losses are down 25%</Typography>
-            <Typography mt="0.4rem" variant="h5" >Profit Margins</Typography>
+            <Typography variant="h6">Losses are down 25%</Typography>
+            <Typography mt="0.4rem" variant="h5">
+              Profit Margins
+            </Typography>
+            <Typography variant="h6">
+              Margins are up by 30% from last month
+            </Typography>
           </Box>
         </Flexbetween>
       </DashboardBox>
-      <DashboardBox gridArea="f"></DashboardBox>
+      <DashboardBox gridArea="f">
+        <BoxHeader title="Product Prices vs Expenses" sideText="+4%" />
+        <ResponsiveContainer width="100%" height="100%">
+          <ScatterChart
+            margin={{
+              top: 20,
+              right: 22,
+              bottom: 38,
+              left: -25,
+            }}
+          >
+            <CartesianGrid stroke={palette.grey[800]} />
+            <XAxis
+              type="number"
+              dataKey="price"
+              name="price"
+              axisLine={false}
+              tickLine={false}
+              style={{ fontSize: "10px" }}
+              tickFormatter={(v) => `$${v}`}  // This will add a dollar sign to the tick. V is the value
+            />
+            <YAxis
+              type="number"
+              dataKey="expense"
+              name="expense"
+              axisLine={false}
+              tickLine={false}
+              style={{ fontSize: "10px" }}
+              tickFormatter={(v) => `$${v}`}  // This will add a dollar sign to the tick. V is the value
+            />
+            <Tooltip
+              formatter={(v) => `$${v}`}
+            />
+            <Scatter
+              name="Product Expense Ratio"
+              data={productExpenseData}  // This is the data for the scatter plot
+              fill={palette.tertiary[500]}  // This will set the color of the dots
+            />
+            <ZAxis
+              type="number"
+              range={[20]}  // Sets the size of the dots
+            />
+          </ScatterChart>
+        </ResponsiveContainer>
+      </DashboardBox>
     </>
   );
 };
