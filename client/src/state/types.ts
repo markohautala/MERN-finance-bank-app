@@ -46,5 +46,17 @@ export interface GetProductsResponse {
 
 }
 
+export interface GetTransactionsResponse {
+  id: string;
+  _id: string;
+  __v: number;
+  buyer: string;
+  amount: number;
+  productIds: Array<string>;
+  createdAt: string;
+  updatedAt: string;
+
+}
+
 // Using typescript interfaces to define the shape of the data that we will be receiving from the api,
 // this will help us to know what data we are working with and what we can expect in the response.
