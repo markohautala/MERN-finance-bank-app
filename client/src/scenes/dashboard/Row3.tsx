@@ -45,13 +45,13 @@ const Row3 = () => {
                 border: "none !important",
               },
               "& .MuiDataGrid-cell": {
-                borderBottom: "none !important", // Remove the border at the bottom of each cell
+                borderBottom: `1px solid ${palette.grey[800]} !important`, // Remove the border at the bottom of each cell
               },
               "& .MuiDataGrid-columnHeaders": {
                 borderBottom: `1px solid ${palette.grey[800]} !important`,
               },
               "& .MuiDataGrid-columnSeparator": {
-                display: "none",
+                visibility: "hidden",
               },
             }}
           >
