@@ -3,7 +3,6 @@ import DashboardBox from '@/components/DashboardBox'
 import { Box, useTheme } from "@mui/material";
 import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@/state/api';
 import { DataGrid, GridCellParams } from '@mui/x-data-grid';
-
 const Row3 = () => {
   const { palette } = useTheme();
   const { data: kpiData } = useGetKpisQuery();
@@ -12,46 +11,47 @@ const Row3 = () => {
 
   const productColumns = [
     {
-      field: "_id",  // This is the key of the data
-      headerName: "ID",  // This is the header of the column
-      flex: 1,  // This column will take up 1 times the space of the other columns
+      field: "_id",
+      headerName: "ID",
+      flex: 1,
     },
     {
-      field: "buyer",  // This is the key of the data
-      headerName: "Buyer",  // This is the header of the column
-      flex: 0.67,  // This column will take up 0.5 times the space of the other columns
+      field: "expense",
+      headerName: "Expense",
+      flex: 0.5,
+      renderCell: (params: GridCellParams) => `$${params.value}`,
     },
     {
-      field: "amount",  // This is the key of the data
-      headerName: "Amount",  // This is the header of the column
-      flex: 0.35,  // This column will take up 0.5 times the space of the other columns
-      renderCell: (params: GridCellParams) => `$${params.value}`,  // This is a function that will render the cell. In this case, it will add a $ sign in front of the value
-    },
-    {
-      field: "productIds",
-      headerName: "Count",
-      flex: 0.1,
-      renderCell: (params: GridCellParams) => params.value.length,
+      field: "price",
+      headerName: "Price",
+      flex: 0.5,
+      renderCell: (params: GridCellParams) => `$${params.value}`,
     },
   ];
 
   const transactionColumns = [
     {
-      field: "_id",  // This is the key of the data
-      headerName: "ID",  // This is the header of the column
-      flex: 1,  // This column will take up 1 times the space of the other columns
+      field: "_id",
+      headerName: "ID",
+      flex: 1,
     },
     {
-      field: "expense",  // This is the key of the data
-      headerName: "Expense",  // This is the header of the column
-      flex: 0.5,  // This column will take up 0.5 times the space of the other columns
-      renderCell: (params: GridCellParams) => `$${params.value}`,  // This is a function that will render the cell. In this case, it will add a $ sign in front of the value
+      field: "buyer",
+      headerName: "Buyer",
+      flex: 0.67,
     },
     {
-      field: "price",  // This is the key of the data
-      headerName: "Price",  // This is the header of the column
-      flex: 0.5,  // This column will take up 0.5 times the space of the other columns
-      renderCell: (params: GridCellParams) => `$${params.value}`,  // This is a function that will render the cell. In this case, it will add a $ sign in front of the value
+      field: "amount",
+      headerName: "Amount",
+      flex: 0.35,
+      renderCell: (params: GridCellParams) => `$${params.value}`,
+    },
+    {
+      field: "productIds",
+      headerName: "Count",
+      flex: 0.1,
+      renderCell: (params: GridCellParams) =>
+        (params.value as Array<string>).length,  // This will count the number of products in the array
     },
   ];
 

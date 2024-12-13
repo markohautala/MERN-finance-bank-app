@@ -43,5 +43,7 @@ mongoose
     // KPI.insertMany(kpis);
     // Product.insertMany(products);
     // Transaction.insertMany(transactions);
+
+    /* Seed data only above. Apply the await line, and then apply the inserMany to refresh the base with the new information */
   })
   .catch((error) => console.log(`${error} did not connect`));
