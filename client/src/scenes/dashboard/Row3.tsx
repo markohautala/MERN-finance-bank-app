@@ -1,13 +1,41 @@
 import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox'
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@/state/api';
 import { DataGrid, GridCellParams } from '@mui/x-data-grid';
+import { Cell, Pie, PieChart } from 'recharts';
+import FlexBetween from '@/components/FlexBetween';
+import { useMemo } from 'react';
+
 const Row3 = () => {
   const { palette } = useTheme();
+  const pieColors = [palette.primary[800], palette.primary[500]];
   const { data: kpiData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
   const { data: transactionData } = useGetTransactionsQuery();
+
+  const pieChartData = useMemo(() => {
+    if (kpiData && kpiData[0]?.expensesByCategory) {
+      const totalExpenses = kpiData[0].totalExpenses || 0;
+      return Object.entries(kpiData[0].expensesByCategory).map(
+        ([key, value]) => {
+          const expenseValue = value || 0; // Ensure value is a number
+          return [
+            {
+              name: key,
+              value: expenseValue,
+            },
+            {
+              name: `${key} of Total`,
+              value: totalExpenses - expenseValue,
+            },
+          ];
+        }
+      );
+    }
+    return []; // Return an empty array if data is unavailable
+  }, [kpiData]);
+
 
   const productColumns = [
     {
@@ -139,7 +167,39 @@ const Row3 = () => {
             />
           </Box>
       </DashboardBox>
-      <DashboardBox  gridArea="i"></DashboardBox>
+      <DashboardBox  gridArea="i">
+        <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
+        <FlexBetween
+          mt="0.5rem"
+          gap="0.5rem"
+          p="0 1rem"
+          textAlign="center"
+        >
+          {pieChartData?.map((data, i) => (
+            <Box key={`${data[0].name}-${i}`}>
+              <PieChart
+                width={110}
+                height={100}
+              >
+                <Pie
+                  stroke="none" // This will remove the border on the pie chart
+                  data={data}
+                  innerRadius={18}
+                  outerRadius={35}
+                  fill="#8884d8"
+                  paddingAngle={2}
+                  dataKey="value"
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={pieColors[index]} />
+                  ))}
+                </Pie>
+              </PieChart>
+              <Typography variant="h5">{data[0].name}</Typography>
+            </Box>
+          ))}
+        </FlexBetween>
+      </DashboardBox>
       <DashboardBox  gridArea="j"></DashboardBox>
     </>
   )
