@@ -5,11 +5,12 @@ import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@
 import { DataGrid, GridCellParams } from '@mui/x-data-grid';
 import { Cell, Pie, PieChart } from 'recharts';
 import FlexBetween from '@/components/FlexBetween';
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 const Row3 = () => {
   const { palette } = useTheme();
   const pieColors = [palette.primary[800], palette.primary[500]];
+
   const { data: kpiData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
   const { data: transactionData } = useGetTransactionsQuery();
@@ -36,6 +37,7 @@ const Row3 = () => {
     return []; // Return an empty array if data is unavailable
   }, [kpiData]);
 
+console.log("kpiData", kpiData)
 
   const productColumns = [
     {
@@ -177,16 +179,12 @@ const Row3 = () => {
         >
           {pieChartData?.map((data, i) => (
             <Box key={`${data[0].name}-${i}`}>
-              <PieChart
-                width={110}
-                height={100}
-              >
+              <PieChart width={110} height={100}>
                 <Pie
-                  stroke="none" // This will remove the border on the pie chart
+                  stroke="none"
                   data={data}
                   innerRadius={18}
                   outerRadius={35}
-                  fill="#8884d8"
                   paddingAngle={2}
                   dataKey="value"
                 >
