@@ -55,7 +55,6 @@ export interface GetTransactionsResponse {
   productIds: Array<string>;
   createdAt: string;
   updatedAt: string;
-
 }
 
 // Using typescript interfaces to define the shape of the data that we will be receiving from the api,
