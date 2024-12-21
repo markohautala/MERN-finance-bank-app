@@ -216,7 +216,7 @@ const Row3 = () => {
           Lorem ipsum odor amet, consectetuer adipiscing elit. Libero elit
           euismod id feugiat litora. Adipiscing aenean risus facilisi aliquam
           parturient fermentum. Arcu phasellus rhoncus elementum; lacus integer
-          fermentum et feugiat erat. 
+          fermentum et feugiat erat.
         </Typography>
       </DashboardBox>
     </>
