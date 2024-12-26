@@ -70,7 +70,13 @@ const Predictions = (props: Props) => {
             stroke="#8884d8"
             dot={false}
           />
-          
+          {isPredictions && (
+            <Line
+              type="monotone"
+              dataKey="Regression Line"
+              stroke="#8884d8"
+            />
+          )}
         </LineChart>
       </ResponsiveContainer>
     </DashboardBox>
