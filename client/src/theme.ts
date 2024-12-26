@@ -13,32 +13,30 @@ export const tokens = {
     900: "#242427",
   },
   primary: {
-    // light green
-    100: "#d0fcf4",
-    200: "#a0f9e9",
-    300: "#71f5de",
-    400: "#41f2d3",
-    500: "#12efc8",
-    600: "#0ebfa0",
-    700: "#0b8f78",
-    800: "#076050",
-    900: "#043028",
+    50: "#abc4ff",
+    100: "#c1d3fe",
+    200: "#ccdbfd",
+    300: "#d7e3fc",
+    400: "#edf2fa",
+    500: "#edf2fa",  // Assuming the main color will be the lightest shade
+    600: "#d7e3fc",
+    700: "#ccdbfd",
+    800: "#c1d3fe",
+    900: "#abc4ff", // Using the darkest shade as the main color
   },
   secondary: {
-    // yellow
-    100: "#fcf0dd",
-    200: "#fae1bb",
-    300: "#f7d299",
-    400: "#f5c377",
-    500: "#f2b455",
-    600: "#c29044",
-    700: "#916c33",
-    800: "#614822",
-    900: "#302411",
+    100: "#B9F3FC", // Replaced with #B9F3FC
+    200: "#B9F3FC", // Replaced with #B9F3FC
+    300: "#B9F3FC", // Replaced with #B9F3FC
+    400: "#B9F3FC", // Replaced with #B9F3FC
+    500: "#B9F3FC", // Replaced with #B9F3FC
+    600: "#B9F3FC", // Replaced with #B9F3FC
+    700: "#B9F3FC", // Replaced with #B9F3FC
+    800: "#B9F3FC", // Replaced with #B9F3FC
+    900: "#B9F3FC", // Replaced with #B9F3FC
   },
   tertiary: {
-    // purple
-    500: "#8884d8",
+    500: "#B9F3FC",  // Replaced purple color with #B9F3FC
   },
   background: {
     light: "#2d2d34",
@@ -50,9 +48,9 @@ export const tokens = {
 export const themeSettings = {
   palette: {
     primary: {
-      ...tokens.primary,  // spread-operator to get all the values
-      main: tokens.primary[500],
-      light: tokens.primary[400],
+      ...tokens.primary,  // spread operator to get all the values
+      main: tokens.primary[50],  // Set the main color to #abc4ff (the darkest)
+      light: tokens.primary[400],  // Now the light color will be #edf2fa
     },
     secondary: {
       ...tokens.secondary,

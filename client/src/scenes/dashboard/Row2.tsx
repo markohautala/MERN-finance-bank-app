@@ -78,8 +78,7 @@ const Row2 = () => {
               bottom: 55, // bottom margin
             }}
           >
-            <CartesianGrid vertical={false} stroke={palette.grey[800]} /> //
-            Only horisontal lines
+            <CartesianGrid vertical={false} stroke={palette.grey[800]} />
             <XAxis
               dataKey="name"
               tickLine={false}
@@ -191,7 +190,7 @@ const Row2 = () => {
               name="price"
               axisLine={false}
               tickLine={false}
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
               tickFormatter={(v) => `$${v}`}  // This will add a dollar sign to the tick. V is the value
             />
             <YAxis
@@ -200,7 +199,7 @@ const Row2 = () => {
               name="expense"
               axisLine={false}
               tickLine={false}
-              style={{ fontSize: "10px" }}
+              style={{ fontSize: "12px" }}
               tickFormatter={(v) => `$${v}`}  // This will add a dollar sign to the tick. V is the value
             />
             <Tooltip
@@ -213,7 +212,7 @@ const Row2 = () => {
             />
             <ZAxis
               type="number"
-              range={[20]}  // Sets the size of the dots
+              range={[70]}  // Sets the size of the dots
             />
           </ScatterChart>
         </ResponsiveContainer>

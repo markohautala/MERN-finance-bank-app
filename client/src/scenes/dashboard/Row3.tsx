@@ -200,19 +200,19 @@ const Row3 = () => {
           sideText="+15%"
         />
         <Box
-          height="15px"
+          height="17px"
           margin="1.25rem 1rem 0.4rem 1rem"
-          bgcolor={palette.primary[800]}
+          bgcolor={palette.primary[300]}
           borderRadius="1rem"
         >
           <Box
-            height="15px"
-            bgcolor={palette.primary[600]}
+            height="17px"
+            bgcolor={palette.primary[900]}
             borderRadius="1rem"
             width="40%"
           ></Box>
         </Box>
-        <Typography margin="0 1rem" variant="h6">
+        <Typography margin="0 1rem" variant="h5">
           Lorem ipsum odor amet, consectetuer adipiscing elit. Libero elit
           euismod id feugiat litora. Adipiscing aenean risus facilisi aliquam
           parturient fermentum. Arcu phasellus rhoncus elementum; lacus integer
