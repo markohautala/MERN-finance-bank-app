@@ -1,27 +1,35 @@
+/* Importing the 'Inter' font family from Google Fonts with various font weights and sizes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+/* Basic styling for the entire page */
 html,
 body,
 #root,
 .app {
-  height: 100%;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  background-color: #1f2026;
+  height: 100%;               /* Ensures the height of the page is 100% */
+  width: 100%;                /* Ensures the width of the page is 100% */
+  font-family: 'Inter', sans-serif;  /* Sets the font to 'Inter' */
+  background-color: #1f2026; /* Sets a dark background color */
 }
-  /* Scrollbar styling */
+
+/* Scrollbar styling */
+
+/* Defines the width of the scrollbar */
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 11px;  /* Adjust the width of the scrollbar */
 }
 
+/* Styling for the scrollbar track (the area the thumb moves along) */
 ::-webkit-scrollbar-track {
-  background: #242427;
+  background: #242427;  /* Dark background for the track */
 }
 
+/* Styling for the scrollbar thumb (the draggable part) */
 ::-webkit-scrollbar-thumb {
-  background: #48494e;
+  background: #48494e;  /* Medium-dark color for the thumb */
 }
 
+/* Hover effect for the scrollbar track */
 ::-webkit-scrollbar-track:hover {
-  background: #1f1f22;
+  background: #1f1f22;  /* Darker background when hovered */
 }

@@ -1,25 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { GetKpisResponse, GetProductsResponse, GetTransactionsResponse } from './types';
 
-// Create a new api call/object with the base query function - vite_base_url is in our .env file
+// Create an API object with a base query function
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
-  reducerPath: "main",  // reducer path for the api means that the api will be stored in the store under the main key
-  tagTypes: ["Kpis", "Products", "Transactions"],  // tag types for the api call
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }), // Base URL from .env
+  reducerPath: "main",  // Store the API data under the "main" key
+  tagTypes: ["Kpis", "Products", "Transactions"],  // Define tag types for cache management
   endpoints: (build) => ({
     getKpis: build.query<Array<GetKpisResponse>, void>({
-      query: () => "kpi/kpis/",   // baseurl + Kpi/Kpis/ will be the endpoint (kpi means key performance indicator)
-      providesTags: ["Kpis"],  // provides tags for the api call
+      query: () => "kpi/kpis/",   // Endpoint for getting KPIs
+      providesTags: ["Kpis"],  // Cache this endpoint under "Kpis"
     }),
     getProducts: build.query<Array<GetProductsResponse>, void>({
-      query: () => "product/products/",
-      providesTags: ["Products"],
+      query: () => "product/products/",  // Endpoint for getting products
+      providesTags: ["Products"],  // Cache this endpoint under "Products"
     }),
     getTransactions: build.query<Array<GetTransactionsResponse>, void>({
-      query: () => "transaction/transactions/",
-      providesTags: ["Transactions"],
+      query: () => "transaction/transactions/",  // Endpoint for getting transactions
+      providesTags: ["Transactions"],  // Cache this endpoint under "Transactions"
     }),
   }),
-})
+});
 
+// Export hooks to use in components
 export const { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } = api;
