@@ -21,60 +21,62 @@ import {
 } from "recharts";
 
 const Row1 = () => {
-  const { palette } = useTheme();
-  const { data } = useGetKpisQuery();
+  const { palette } = useTheme();  // Getting the theme colors
+  const { data } = useGetKpisQuery(); // Fetching KPI data from the API
 
+  // Memoizing the revenue data to prevent unnecessary re-renders
   const revenue = useMemo(() => {
     return (
       data &&
       data[0].monthlyData.map(({ month, revenue }) => {
         return {
-          name: month.substring(0, 3),
+          name: month.substring(0, 3), // Only show the first 3 letters of the month
           revenue: revenue,
         };
       })
     );
-  }, [data]); // run only when data changes
+  }, [data]); // This will run only when the data changes
 
+  // Memoizing revenue and expenses data to calculate revenue and expenses side-by-side
   const revenueExpenses = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-          expenses: expenses,
-        };
-      })
-    );
-  }, [data]); // run only when data changes
-
-  const revenueProfit = useMemo(() => {
     return (
       data &&
       data[0].monthlyData.map(({ month, revenue, expenses }) => {
         return {
           name: month.substring(0, 3), // Only show the first 3 letters of the month
           revenue: revenue,
-          profit: Number((revenue - expenses).toFixed(2)), // Calculate the profit. toFixed will round the number to 2 decimal places and convert it back to a number
+          expenses: expenses,
         };
       })
     );
-  }, [data]); // run only when data changes
+  }, [data]); // Recalculates only when data changes
+
+  // Memoizing revenue and profit data (profit = revenue - expenses)
+  const revenueProfit = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+          profit: Number((revenue - expenses).toFixed(2)), // Calculating profit with rounding
+        };
+      })
+    );
+  }, [data]); // Recalculates only when data changes
 
   return (
     <>
+      {/* First Dashboard Box for Revenue and Expenses */}
       <DashboardBox gridArea="a">
         <LoadingWrapper>
           <BoxHeader
             title="Revenue and Expenses"
             subtitle="Top line represents revenue, bottom line represents expenses"
-            sideText="+4%"
+            sideText="+4%" // Side text indicating change (e.g., 4% increase)
           />
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              width={500}
-              height={400}
               data={revenueExpenses}
               margin={{
                 top: 15, // top margin
@@ -84,6 +86,7 @@ const Row1 = () => {
               }}
             >
               <defs>
+                {/* Gradient for revenue */}
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
@@ -96,6 +99,7 @@ const Row1 = () => {
                     stopOpacity={0}
                   />
                 </linearGradient>
+                {/* Gradient for expenses */}
                 <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
@@ -118,9 +122,10 @@ const Row1 = () => {
                 tickLine={false}
                 axisLine={{ strokeWidth: "0" }}
                 style={{ fontSize: "12px" }}
-                domain={[10000, 23500]}
+                domain={[10000, 23500]} // Setting the range for the Y-axis
               />
               <Tooltip />
+              {/* Area chart for revenue */}
               <Area
                 type="monotone"
                 dot={true}
@@ -129,6 +134,7 @@ const Row1 = () => {
                 fillOpacity={1}
                 fill="url(#colorRevenue)"
               />
+              {/* Area chart for expenses */}
               <Area
                 type="monotone"
                 dot={true}
@@ -142,12 +148,13 @@ const Row1 = () => {
         </LoadingWrapper>
       </DashboardBox>
 
+      {/* Second Dashboard Box for Profit and Revenue */}
       <DashboardBox gridArea="b">
         <LoadingWrapper>
           <BoxHeader
             title="Profit and Revenue"
             subtitle="Top line represents revenue, bottom line represents expenses"
-            sideText="+4%"
+            sideText="+4%" // Side text indicating change (e.g., 4% increase)
           />
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -159,8 +166,8 @@ const Row1 = () => {
                 bottom: 55, // bottom margin
               }}
             >
-              <CartesianGrid vertical={false} stroke={palette.grey[800]} /> //
-              Only horisontal lines
+              <CartesianGrid vertical={false} stroke={palette.grey[800]} />
+              {/* Only horizontal lines */}
               <XAxis
                 dataKey="name"
                 tickLine={false}
@@ -183,46 +190,46 @@ const Row1 = () => {
               <Legend
                 height={20}
                 wrapperStyle={{
-                  margin: "0px 0px 10px 0px",
+                  margin: "0px 0px 10px 0px", // Margin for the legend
                 }}
               />
               <Line
                 yAxisId="left" // This will place the line on the left side
                 type="monotone"
                 dataKey="profit"
-                stroke={palette.tertiary[500]}
+                stroke={palette.tertiary[500]} // Color for profit line
               />
               <Line
                 yAxisId="right" // This will place the line on the right side
                 type="monotone"
                 dataKey="revenue"
-                stroke={palette.primary.main}
+                stroke={palette.primary.main} // Color for revenue line
               />
             </LineChart>
           </ResponsiveContainer>
         </LoadingWrapper>
       </DashboardBox>
 
+      {/* Third Dashboard Box for Revenue by Month */}
       <DashboardBox gridArea="c">
         <LoadingWrapper>
           <BoxHeader
             title="Revenue by Month"
             subtitle="Graph showing revenue by month"
-            sideText="+4%"
+            sideText="+4%" // Side text indicating change (e.g., 4% increase)
           />
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              width={500}
-              height={300}
               data={revenue}
               margin={{
-                top: 17,
-                right: 15,
-                left: -5,
-                bottom: 58,
+                top: 17, // top margin
+                right: 15, // right margin
+                left: -5, // left margin
+                bottom: 58, // bottom margin
               }}
             >
               <defs>
+                {/* Gradient for revenue */}
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
@@ -249,10 +256,11 @@ const Row1 = () => {
                 style={{ fontSize: "12px" }}
               />
               <Tooltip />
+              {/* Bar chart for revenue */}
               <Bar
-                dataKey="revenue" // This is the key in the data object
-                fill="url(#colorRevenue)" // This is the gradient color
-                activeBar={<Rectangle fill="white" stroke="black" />}
+                dataKey="revenue" // Data for the revenue bar chart
+                fill="url(#colorRevenue)" // Gradient color for the bars
+                activeBar={<Rectangle fill="white" stroke="black" />} // Active bar styling
               />
             </BarChart>
           </ResponsiveContainer>
