@@ -14,7 +14,7 @@ const Navbar = () => {
         {/* Left side of the navbar: Branding */}
         <FlexBetween gap="0.4rem">
           <AccountBalanceSharpIcon sx={{ fontSize: "28px" }} /> {/* Account icon */}
-          <Typography variant="h4" fontSize="24px">
+          <Typography variant="h4" fontSize="16px">
             Finanseer
           </Typography>
         </FlexBetween>
