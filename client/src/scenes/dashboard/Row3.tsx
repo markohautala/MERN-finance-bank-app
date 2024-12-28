@@ -64,7 +64,6 @@ const Row3 = () => {
     },
   ];
 
-  // Columns for displaying transaction data in the DataGrid
   const transactionColumns = [
     {
       field: "_id", // Column for transaction ID
@@ -79,17 +78,19 @@ const Row3 = () => {
     {
       field: "amount", // Column for transaction amount
       headerName: "Amount", // Header for the column
-      flex: 0.4, // Column takes up 1/3 of the space
+      flex: 0.7, // Increase space allocated for the Amount column
+      minWidth: 120, // Set a minimum width to ensure it doesn't get too narrow
       renderCell: (params: GridCellParams) => `$${params.value}`, // Format the amount as currency
     },
     {
       field: "productIds", // Column for product count in the transaction
       headerName: "Count", // Header for the column
-      flex: 0.47, // Column takes up a small space
+      flex: 0.4, // Reduce space for Count column slightly
       renderCell: (params: GridCellParams) =>
         (params.value as Array<string>).length, // Display the number of products in the transaction
     },
   ];
+
 
   return (
     <>
