@@ -4,9 +4,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import FlexBetween from "@/components/FlexBetween";
 import AccountBalanceSharpIcon from "@mui/icons-material/AccountBalanceSharp";
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("dashboard"); // State to keep track of selected navigation item
 
