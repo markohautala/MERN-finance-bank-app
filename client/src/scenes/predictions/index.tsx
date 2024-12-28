@@ -82,7 +82,7 @@ const Predictions = () => {
           </Button>
         </Flexbetween>
 
-        <ResponsiveContainer width="100%" height={isSmallScreen ? 400 : "100%"}>
+        <ResponsiveContainer width="100%" height={isSmallScreen ? 500 : "100%"}>
           <LineChart
             data={formattedData}  // Data for the chart
             margin={{
