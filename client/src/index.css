@@ -16,7 +16,7 @@ body,
 
 /* Defines the width of the scrollbar */
 ::-webkit-scrollbar {
-  width: 11px;  /* Adjust the width of the scrollbar */
+  width: 13px;  /* Adjust the width of the scrollbar */
 }
 
 /* Styling for the scrollbar track (the area the thumb moves along) */

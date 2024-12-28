@@ -68,7 +68,9 @@ const Row1 = () => {
   return (
     <>
       {/* First Dashboard Box for Revenue and Expenses */}
-      <DashboardBox gridArea="a">
+      <DashboardBox
+        gridArea="a"
+      >
         <LoadingWrapper>
           <BoxHeader
             title="Revenue and Expenses"

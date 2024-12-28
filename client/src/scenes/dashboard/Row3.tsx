@@ -186,7 +186,14 @@ const Row3 = () => {
       </DashboardBox>
 
       {/* Third Dashboard Box for Expense Breakdown By Category */}
-      <DashboardBox gridArea="i">
+      <DashboardBox
+        gridArea="i"
+        sx={{
+          maxWidth: "100%", // Ensure the box does not exceed the container width
+          height: "100%", // Ensure the height is constrained
+          overflow: "hidden", // Optional, if you want to hide overflow
+        }}
+      >
         <LoadingWrapper>
           <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
           <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
@@ -206,7 +213,7 @@ const Row3 = () => {
                     ))}
                   </Pie>
                 </PieChart>
-                <Typography variant="h4" mt="-25px">
+                <Typography variant="h4" mt="-27px">
                   {data[0].name} {/* Label for the pie chart */}
                 </Typography>
               </Box>
