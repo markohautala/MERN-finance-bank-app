@@ -73,19 +73,19 @@ const Row3 = () => {
     {
       field: "buyer", // Column for buyer name
       headerName: "Buyer", // Header for the column
-      flex: 0.55, // Column takes up 2/3 of the space
+      flex: 0.6, // Column takes up 2/3 of the space
     },
     {
       field: "amount", // Column for transaction amount
       headerName: "Amount", // Header for the column
-      flex: 0.7, // Increase space allocated for the Amount column
+      flex: 0.67, // Increase space allocated for the Amount column
       minWidth: 120, // Set a minimum width to ensure it doesn't get too narrow
       renderCell: (params: GridCellParams) => `$${params.value}`, // Format the amount as currency
     },
     {
       field: "productIds", // Column for product count in the transaction
       headerName: "Count", // Header for the column
-      flex: 0.4, // Reduce space for Count column slightly
+      flex: 0.35, // Reduce space for Count column slightly
       renderCell: (params: GridCellParams) =>
         (params.value as Array<string>).length, // Display the number of products in the transaction
     },
