@@ -82,14 +82,14 @@ const Predictions = () => {
           </Button>
         </Flexbetween>
 
-        <ResponsiveContainer width="100%" height={isSmallScreen ? 500 : "100%"}>
+        <ResponsiveContainer width="100%" height={isSmallScreen ? 430 : "100%"}>
           <LineChart
             data={formattedData}  // Data for the chart
             margin={{
               top: isSmallScreen ? 10 : 20,  // Adjust top margin for small screens
-              right: isSmallScreen ? 30 : 75,  // Adjust right margin for small screens
-              left: isSmallScreen ? 20 : 20,  // Left margin stays the same
-              bottom: isSmallScreen ? 80 : 80,  // Adjust bottom margin for small screens (increased)
+              right: isSmallScreen ? 10 : 75,  // Adjust right margin for small screens
+              left: isSmallScreen ? 10 : 20,  // Left margin stays the same
+              bottom: isSmallScreen ? 70 : 80,  // Adjust bottom margin for small screens (increased)
             }}
           >
             {/* Add a grid to the chart for better readability */}
@@ -105,16 +105,18 @@ const Predictions = () => {
               style={{ fontSize: isSmallScreen ? "12px" : "14px" }}
               tickFormatter={(v) => `$${v}`}  // Format the Y axis ticks as currency
             >
-              <Label
-                value="Revenue"
-                angle={-90}  // Rotate the label for the Y axis
-                offset={-15}  // Adjust the label position
-                position="insideLeft"  // Position the label on the left
-              />
+            <Label
+              value="Revenue"
+              angle={-90} // Rotate the label for the Y axis
+              offset={isSmallScreen ? -3 : -13} // Dynamic offset based on screen size
+              position="insideLeft" // Position the label on the left
+            />
             </YAxis>
             <Tooltip />  {/* Show a tooltip when hovering over the chart */}
-            <Legend verticalAlign="top" />  {/* Display the legend at the top */}
-
+            <Legend
+              verticalAlign="top"
+              wrapperStyle={{ paddingBottom: '10px' }}
+            />
             {/* Line for actual revenue */}
             <Line
               type="monotone"
