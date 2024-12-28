@@ -1,5 +1,5 @@
 import { useGetKpisQuery } from "@/state/api";  // Import a custom hook to fetch data (KPI data)
-import { Box, Button, Typography, useTheme } from "@mui/material";  // Import UI components from Material UI
+import { Box, Button, Typography, useTheme, useMediaQuery } from "@mui/material";  // Import UI components from Material UI
 import { useMemo, useState } from "react";  // Import React hooks for state and memoization
 import LoadingWrapper from "@/components/LoadingWrapper";  // Import a component to show a loading spinner
 import DashboardBox from "@/components/DashboardBox";  // Import a box layout component for the dashboard
@@ -21,6 +21,9 @@ const Predictions = () => {
   const { palette } = useTheme();  // Access the color palette from the theme
   const [isPredictions, setIsPredictions] = useState(false);  // Set up a state to toggle predictions visibility
   const { data: kpiData } = useGetKpisQuery();  // Fetch KPI data using the custom hook
+
+  // Media query for screens 768px and below
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   // Format the data to make it ready for the chart
   const formattedData = useMemo(() => {
@@ -52,11 +55,11 @@ const Predictions = () => {
     <DashboardBox
       width="100%"  // Make the box take up full width
       height="100%"  // Make the box take up full height
-      padding="1rem 2rem 4rem 2rem"  // Add padding around the box
+      p="1rem"  // Add padding around the box
       overflow="hidden"  // Hide anything that overflows the box
     >
       <LoadingWrapper>  {/* Show a loading spinner while data is being fetched */}
-        <Flexbetween m="1rem 2.5rem" gap="1rem">  {/* Layout for the title and button */}
+        <Flexbetween m={isSmallScreen ? "1rem" : "1rem 2.5rem"} gap="1rem" flexDirection={isSmallScreen ? "column" : "row"}>
           <Box>
             <Typography variant="h3">Revenue and Predictions</Typography>  {/* Main title */}
             <Typography variant="h5">
@@ -69,6 +72,7 @@ const Predictions = () => {
               color: palette.grey[900],  // Button text color
               backgroundColor: palette.grey[500],  // Button background color
               boxShadow: "0.1rem 0.1rem 0.1rem 0.1rem rgba(0,0,0,0.2)",  // Button shadow effect
+              marginTop: isSmallScreen ? "1rem" : "0",  // Add margin top on small screens for better spacing
             }}
           >
             {isPredictions
@@ -77,27 +81,28 @@ const Predictions = () => {
             }
           </Button>
         </Flexbetween>
-        <ResponsiveContainer width="100%" height="100%">
+
+        <ResponsiveContainer width="100%" height={isSmallScreen ? 400 : "100%"}>
           <LineChart
             data={formattedData}  // Data for the chart
             margin={{
-              top: 20,  // Margin on top of the chart
-              right: 75,  // Margin on the right of the chart
-              left: 20,  // Margin on the left of the chart
-              bottom: 80,  // Margin on the bottom of the chart
+              top: isSmallScreen ? 10 : 20,  // Adjust top margin for small screens
+              right: isSmallScreen ? 30 : 75,  // Adjust right margin for small screens
+              left: isSmallScreen ? 20 : 20,  // Left margin stays the same
+              bottom: isSmallScreen ? 80 : 80,  // Adjust bottom margin for small screens (increased)
             }}
           >
             {/* Add a grid to the chart for better readability */}
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
             {/* Set up the X axis */}
-            <XAxis dataKey="name" tickLine={false} style={{ fontSize: "14px" }}>
+            <XAxis dataKey="name" tickLine={false} style={{ fontSize: isSmallScreen ? "12px" : "14px" }}>
               <Label value="Month" offset={-15} position="insideBottom" />  {/* Label for X axis */}
             </XAxis>
             {/* Set up the Y axis */}
             <YAxis
-              domain={[12000, 26000]}  // Set the range for the Y axis
+              domain={[14000, 26000]}  // Set the range for the Y axis
               axisLine={{ strokeWidth: "0" }}  // Hide the axis line
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: isSmallScreen ? "12px" : "14px" }}
               tickFormatter={(v) => `$${v}`}  // Format the Y axis ticks as currency
             >
               <Label

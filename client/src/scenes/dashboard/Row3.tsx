@@ -196,10 +196,10 @@ const Row3 = () => {
       >
         <LoadingWrapper>
           <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
-          <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
+          <FlexBetween mt="0.5rem" p="0 1rem" textAlign="center" >
             {pieChartData?.slice(0, 3).map((data, i) => (
               <Box key={`${data[0].name}-${i}`}>
-                <PieChart width={110} height={100} margin={{ bottom: 25 }}>
+                <PieChart width={100} height={100} margin={{ bottom: 25 }}>
                   <Pie
                     stroke="none" // Remove stroke around the pie chart
                     data={data} // Pass the data for the pie chart
