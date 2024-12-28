@@ -85,7 +85,7 @@ const Row3 = () => {
     {
       field: "productIds", // Column for product count in the transaction
       headerName: "Count", // Header for the column
-      flex: 0.35, // Reduce space for Count column slightly
+      flex: 0.4, // Reduce space for Count column slightly
       renderCell: (params: GridCellParams) =>
         (params.value as Array<string>).length, // Display the number of products in the transaction
     },
