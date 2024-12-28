@@ -80,9 +80,9 @@ const Row1 = () => {
               data={revenueExpenses}
               margin={{
                 top: 15, // top margin
-                right: 20, // right margin
-                left: -10, // left margin
-                bottom: 60, // bottom margin
+                right: 15, // right margin
+                left: 0, // left margin
+                bottom: 75, // bottom margin
               }}
             >
               <defs>
@@ -162,8 +162,8 @@ const Row1 = () => {
               margin={{
                 top: 20, // top margin
                 right: 0, // right margin
-                left: -10, // left margin
-                bottom: 55, // bottom margin
+                left: 0, // left margin
+                bottom: 75, // bottom margin
               }}
             >
               <CartesianGrid vertical={false} stroke={palette.grey[800]} />
