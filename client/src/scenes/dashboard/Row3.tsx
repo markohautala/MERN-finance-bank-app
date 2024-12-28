@@ -79,7 +79,7 @@ const Row3 = () => {
     {
       field: "amount", // Column for transaction amount
       headerName: "Amount", // Header for the column
-      flex: 0.35, // Column takes up 1/3 of the space
+      flex: 0.4, // Column takes up 1/3 of the space
       renderCell: (params: GridCellParams) => `$${params.value}`, // Format the amount as currency
     },
     {
