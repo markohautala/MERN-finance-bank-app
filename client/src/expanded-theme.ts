@@ -1,5 +1,3 @@
-import type { Palette, PaletteColor } from "@mui/material/styles/createPalette";
-
 // Extending the default MUI Palette types to include a 'tertiary' color
 declare module "@mui/material/styles/createPalette" {
   // Adding support for numeric keys (like 100, 200, etc.) in the PaletteColor interface
