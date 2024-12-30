@@ -7,7 +7,7 @@ import { Box, Typography, useTheme } from '@mui/material'
 type Props = {
   icon?: React.ReactNode; // ReactNode is a type that can hold any JSX expression
   title: string; // title is a required prop of type string, question mark makes it optional
-  subtitle?: string; // subtitle is an optional prop of type string
+  subtitle?: string; // subtitle is an optional prop of type of string
   sideText: string;
 }
 
