@@ -41,8 +41,6 @@ const Row3 = () => {
     }
   }, [kpiData]); // This will recalculate when kpiData changes
 
-  console.log("kpiData", kpiData); // Logging kpiData for debugging
-
   // Columns for displaying product data in the DataGrid
   const productColumns = [
     {
