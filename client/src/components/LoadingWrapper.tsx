@@ -3,16 +3,26 @@ import spinner from '@/assets/spinner.gif'; // Importing the spinner GIF for the
 
 interface LoadingWrapperProps {
   children: ReactNode; // The child components to render after loading is complete
+  fetchData: () => Promise<unknown>; // Function to fetch data
 }
 
-const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
+const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children, fetchData }) => {
   const [isLoading, setIsLoading] = useState(true); // State to control loading status
 
-  // useEffect to simulate a loading delay (1 second in this case)
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000); // Sets loading to false after 1 second
-    return () => clearTimeout(timer); // Cleanup function to clear the timer when the component is unmounted
-  }, []); // Empty dependency array means this runs only once when the component mounts
+    // Fetch data and set loading to false once data is retrieved
+    const loadData = async () => {
+      try {
+        await fetchData(); // Fetch the data
+        setIsLoading(false); // Set loading to false after data is retrieved
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false); // Optionally handle errors by setting loading to false
+      }
+    };
+
+    loadData(); // Call the function to load data
+  }, [fetchData]); // Run effect when fetchData changes
 
   return isLoading ? (
     // When still loading, show the spinner in the center of the screen
