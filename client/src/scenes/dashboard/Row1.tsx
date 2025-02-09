@@ -21,8 +21,16 @@ import {
 } from "recharts";
 
 const Row1 = () => {
-  const { palette } = useTheme();  // Getting the theme colors
-  const { data } = useGetKpisQuery(); // Fetching KPI data from the API
+  const { palette } = useTheme(); // Getting the theme colors
+  const { data, isLoading: isKpiLoading } = useGetKpisQuery(); // Fetching KPI data from the API
+
+  // Create a fetchData function for LoadingWrapper
+  const fetchData = async () => {
+    // Wait for the data to be fetched
+    if (!isKpiLoading && data) {
+      return data; // Return the data once it's available
+    }
+  };
 
   // Memoizing the revenue data to prevent unnecessary re-renders
   const revenue = useMemo(() => {
@@ -68,10 +76,8 @@ const Row1 = () => {
   return (
     <>
       {/* First Dashboard Box for Revenue and Expenses */}
-      <DashboardBox
-        gridArea="a"
-      >
-        <LoadingWrapper>
+      <DashboardBox gridArea="a">
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Revenue and Expenses"
             subtitle="Top line represents revenue, bottom line represents expenses"
@@ -152,7 +158,7 @@ const Row1 = () => {
 
       {/* Second Dashboard Box for Profit and Revenue */}
       <DashboardBox gridArea="b">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Profit and Revenue"
             subtitle="Top line represents revenue, bottom line represents expenses"
@@ -214,7 +220,7 @@ const Row1 = () => {
 
       {/* Third Dashboard Box for Revenue by Month */}
       <DashboardBox gridArea="c">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Revenue by Month"
             subtitle="Graph showing revenue by month"

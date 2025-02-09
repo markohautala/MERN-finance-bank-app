@@ -35,6 +35,14 @@ const Row2 = () => {
   const { data: operationalData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
 
+  // Create a fetchData function for LoadingWrapper
+  const fetchData = async () => {
+    // Wait for the data to be fetched
+    if (operationalData && productData) {
+      return { operationalData, productData }; // Return the data once it's available
+    }
+  };
+
   // Memoize operational expenses to prevent unnecessary re-renders
   const operationalExpenses = useMemo(() => {
     return (
@@ -69,7 +77,7 @@ const Row2 = () => {
     <>
       {/* DashboardBox for Operational vs Non-Operational Expenses chart */}
       <DashboardBox gridArea="d">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Operational vs Non-Operational Expenses"
             sideText="+4%" // Display a change percentage
@@ -126,7 +134,7 @@ const Row2 = () => {
 
       {/* DashboardBox for Campaign and Targets */}
       <DashboardBox gridArea="e">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader title="Campaign and Targets" sideText="+4%" />
           <Flexbetween mt="0.25rem" gap="1.5rem" pr="1rem">
             {/* Pie chart displaying some data */}
@@ -180,7 +188,7 @@ const Row2 = () => {
 
       {/* DashboardBox for Product Prices vs Expenses scatter chart */}
       <DashboardBox gridArea="f">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader title="Product Prices vs Expenses" sideText="+4%" />
           {/* Responsive container for the scatter chart */}
           <ResponsiveContainer width="100%" height="100%">

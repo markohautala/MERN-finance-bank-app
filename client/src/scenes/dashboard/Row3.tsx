@@ -21,6 +21,14 @@ const Row3 = () => {
   const { data: productData } = useGetProductsQuery();
   const { data: transactionData } = useGetTransactionsQuery();
 
+  // Create a fetchData function for LoadingWrapper
+  const fetchData = async () => {
+    // Wait for the data to be fetched
+    if (productData) {
+      return { productData }; // Return the data once it's available
+    }
+  };
+
   // Memoizing pie chart data based on KPI data
   const pieChartData = useMemo(() => {
     if (kpiData) {
@@ -94,7 +102,7 @@ const Row3 = () => {
     <>
       {/* First Dashboard Box for Product List */}
       <DashboardBox gridArea="g">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Product List" // Title for the section
             sideText={`Products: ${productData?.length}`} // Display the count of products
@@ -139,7 +147,7 @@ const Row3 = () => {
 
       {/* Second Dashboard Box for Recent Orders */}
       <DashboardBox gridArea="h">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Recent Orders" // Title for the section
             sideText={`${transactionData?.length} latest transactions`} // Display the count of transactions
@@ -192,7 +200,7 @@ const Row3 = () => {
           overflow: "hidden", // Optional, if you want to hide overflow
         }}
       >
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
           <FlexBetween mt="0.5rem" p="0 1rem" textAlign="center" >
             {pieChartData?.slice(0, 3).map((data, i) => (
@@ -222,7 +230,7 @@ const Row3 = () => {
 
       {/* Fourth Dashboard Box for Overall Summary */}
       <DashboardBox gridArea="j">
-        <LoadingWrapper>
+        <LoadingWrapper fetchData={fetchData}>
           <BoxHeader
             title="Overall Summary and Explanation Data" // Title for the section
             sideText="+15%" // Side text with some value

@@ -22,6 +22,15 @@ const Predictions = () => {
   const [isPredictions, setIsPredictions] = useState(false);  // Set up a state to toggle predictions visibility
   const { data: kpiData } = useGetKpisQuery();  // Fetch KPI data using the custom hook
 
+  // Create a fetchData function for LoadingWrapper
+  const fetchData = async () => {
+    // Wait for the data to be fetched
+    if (kpiData) {
+      return { kpiData }; // Return the data once it's available
+    }
+  };
+
+
   // Media query for screens 768px and below
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
@@ -58,7 +67,7 @@ const Predictions = () => {
       p="1rem"  // Add padding around the box
       overflow="hidden"  // Hide anything that overflows the box
     >
-      <LoadingWrapper>  {/* Show a loading spinner while data is being fetched */}
+      <LoadingWrapper fetchData={fetchData}>  {/* Show a loading spinner while data is being fetched */}
         <Flexbetween m={isSmallScreen ? "1rem" : "1rem 2.5rem"} gap="1rem" flexDirection={isSmallScreen ? "column" : "row"}>
           <Box>
             <Typography variant="h3">Revenue and Predictions</Typography>  {/* Main title */}
